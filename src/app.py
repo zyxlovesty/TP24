@@ -33,7 +33,7 @@ def home_page_content():
     return html.Div([
         dbc.Row([
            html.Div([
-                html.H1("Welcome to the Sun Safety App", className='text-center'),
+                html.H1("Welcome to the Sun Safe App", className='text-center'),
                 html.P("Get informed about UV levels and learn how to protect yourself.", className='text-center'),
            ],style={'margin-top': '80px'})
         ]),
@@ -77,7 +77,7 @@ app.layout = html.Div([
             dbc.NavItem(dbc.NavLink([html.I(className='fas fa-shield-alt mr-1'), "  Recommendations"], href="#", id='recommendations')),
             dbc.NavItem(dbc.NavLink([html.I(className='fas fa-info-circle mr-1'), "  More Information"], href="#", id='more-info'))
         ],
-        brand="Sun Safety App",
+        brand="Sun Safe",
         brand_href="#",
         color="dark",
         dark=True,
@@ -300,7 +300,7 @@ def update_uv_index(n_clicks, postcode):
         uv_index = get_uv_index(postcode)
         return (
             html.Div([
-                html.H4(f'UV Index for {postcode}: {uv_index}', style={'textAlign': 'center'}),
+                html.H6(f'UV Index for {postcode}: {uv_index}', style={'textAlign': 'center'}),
                 html.Div([
                     Gauge(color={"gradient": True, "ranges": {"green": [0, 3], "yellow": [3, 6], "orange": [6, 8], "red": [8, 12]}},
                           value=uv_index, max=12, min=0),
@@ -449,5 +449,7 @@ def get_uv_index(postcode):
     uvi = uvi_response.get("current", {}).get("uvi")
     return uvi
  
+# server = app.server
+
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
